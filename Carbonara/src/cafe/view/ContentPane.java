@@ -4,8 +4,11 @@
  */
 package cafe.view;
 
+import java.util.Set;
+import java.util.Iterator;
 import cafe.control.MainController;
 import document.Document;
+import document.tags.Tag;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
@@ -47,7 +50,7 @@ public class ContentPane extends AnchorPane {
     public static final float INSPECTOR_WIDTH = 250.0f;
     public static final float INSPECTOR_HORIZONTAL_SPACE = 20.0f;
     public static final float INSPECTOR_VERTICAL_SPACE = 10.0f;
-    
+    private static final float INSPECTOR_BOX_SPACE = 8.0f;
     public static final String MENU_ICON_NEW_ID = "ID:MENU_ICON_NEW";
     public static final String MENU_ICON_OPEN_ID = "ID:MENU_ICON_OPEN";
     public static final String MENU_ICON_SAVE_ID = "ID:MENU_ICON_SAVE";
@@ -62,6 +65,7 @@ public class ContentPane extends AnchorPane {
     public static final String TAG_CONTENT_ID = "ID:TAG_CONTENT";
     public static final String TAG_TITLE_ID = "ID:TAG_TITLE";
     public static final String TAG_PARAGRAPH_ID = "ID:TAG_PARAGRAPH";
+
     
     private MainController controller;
     private ContentPane self;
@@ -75,6 +79,7 @@ public class ContentPane extends AnchorPane {
     private VBox page_icon_row_container;
     private ArrayList<HBox> page_icon_rows;
     private ScrollPane inspector;
+    private VBox inspector_box;
     private ScrollPane editor;
     private AnchorPane page_preview;
     private Document document;
@@ -247,6 +252,10 @@ public class ContentPane extends AnchorPane {
         self.inspector.setStyle("-fx-background-color: #efdf9f;-fx-background-radius:5px;-fx-border-color:#af9f4f;-fx-border-width:1px;-fx-border-radius:5px;");
 
         self.getChildren().add(self.inspector);
+        
+        self.inspector_box = new VBox(ContentPane.INSPECTOR_BOX_SPACE);
+        
+        self.inspector.setContent(self.inspector_box);
 
         self.editor = new ScrollPane();
         self.editor.setStyle("-fx-background-color: #efefef;-fx-background-radius:5px;-fx-border-color:#afafaf;-fx-border-width:1px;-fx-border-radius:5px;");
@@ -326,5 +335,20 @@ public class ContentPane extends AnchorPane {
 
         self.page_icon_row_container.getChildren().add(page_icon_row);
         self.page_icon_rows.add(page_icon_row);
+    }
+
+    public void onPreviewPaneClicked(Tag event_source) {
+        self.inspector_box.getChildren().clear();
+        
+        Set<String> param_names = event_source.getParameterNames();
+        Iterator<String> iterator = param_names.iterator();
+        
+        while(iterator.hasNext()){
+            String name = iterator.next();
+            VBox param_box = new VBox();
+            param_box.setPrefWidth(self.inspector_box.getPrefWidth());
+            event_source.getParameterEditor(param_box, name);
+            self.inspector_box.getChildren().add(param_box);
+        }
     }
 }

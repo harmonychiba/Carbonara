@@ -288,4 +288,10 @@ public class PageRenderer implements TagDataChangeListener {
         self.preview_tag.setOpacity(0.0f);
         self.expand_anim.play();
     }
+
+    public void setPreview_tag(Pane preview_tag) {
+        this.preview_tag = preview_tag;
+        self.render();
+    }
+    
 }

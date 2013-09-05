@@ -9,10 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 /**
  *
@@ -28,6 +28,7 @@ public class FooterTag extends Tag{
         super(Tag.FOOTER);
         initializeParameters();
         self.preview_pane = new AnchorPane();
+        self.initPreviewPane();
     }
 
     private void initializeParameters() {
@@ -113,5 +114,10 @@ public class FooterTag extends Tag{
     @Override
     public void dragDrop(String id){
        
+    }
+
+    @Override
+    public void getParameterEditor(VBox box, String param) {
+
     }
 }

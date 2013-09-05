@@ -45,11 +45,13 @@ public class Page {
     
     public void addTag(Tag tag){
         self.tags.add(tag);
+        tag.setPage(self);
         tag.setListener(self.listener);
         self.pushEvent();
     }
     public void insertTag(Tag tag,int index){
         self.tags.add(index, tag);
+        tag.setPage(self);
         tag.setListener(self.listener);
         self.pushEvent();
     }

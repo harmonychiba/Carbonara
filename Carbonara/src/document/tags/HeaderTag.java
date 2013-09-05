@@ -6,11 +6,10 @@ package document.tags;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.ColorInput;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -29,6 +28,7 @@ public class HeaderTag extends Tag{
         super(Tag.HEADER);
         initializeParameters();
         self.preview_pane = new AnchorPane();
+        self.initPreviewPane();
     }
 
     private void initializeParameters() {
@@ -112,5 +112,10 @@ public class HeaderTag extends Tag{
     @Override
     public void dragDrop(String id) {
         
+    }
+
+    @Override
+    public void getParameterEditor(VBox box, String param) {
+
     }
 }

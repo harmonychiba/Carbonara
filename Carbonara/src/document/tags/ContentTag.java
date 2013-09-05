@@ -4,12 +4,20 @@
  */
 package document.tags;
 
+import cafe.Carbonara;
 import cafe.control.PageRenderer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -31,16 +39,16 @@ public class ContentTag extends Tag {
     public static final float DEFAULT_MARGIN_BOTTOM = 30.0f;
 
     public ContentTag() {
-        super(Tag.HEADER);
+        super(Tag.CONTENT);
         initializeParameters();
         self.setContainable(true);
         self.preview_pane = new AnchorPane();
         self.children_preview = new VBox(DEFAULT_CHILDREN_SPACE);
+        self.initPreviewPane();
     }
 
     private void initializeParameters() {
         self.setParameter("fix", "false");
-        self.setParameter("word", "HEADER");
         self.setParameter("image", "null");
         self.setParameter("width", "match_parent");
         self.setParameter("height", "wrap_content");
@@ -92,7 +100,7 @@ public class ContentTag extends Tag {
         background.setStrokeLineJoin(StrokeLineJoin.ROUND);
         background.setStroke(Color.GRAY);
         background.setStrokeType(StrokeType.INSIDE);
-        
+
         pane.getChildren().add(background);
         pane.getChildren().add(self.children_preview);
 
@@ -245,9 +253,9 @@ public class ContentTag extends Tag {
             if (new_tag != null) {
                 new_tag.setListener(self.listener);
                 if (self.indexToAddTag != PageRenderer.TO_ADD_LAST_OF_LIST) {
-                    self.getChildren().add(self.indexToAddTag, new_tag);
+                    self.addChildAtIndex(self.indexToAddTag, new_tag);
                 } else {
-                    self.getChildren().add(new_tag);
+                    self.addChildAtLast(new_tag);
                 }
             }
             //self.controller.itemDropped(id, self.indexToAddTag);
@@ -257,5 +265,116 @@ public class ContentTag extends Tag {
         }
         System.out.println(self.listener);
         self.pushEvent();
+    }
+
+    @Override
+    public void getParameterEditor(VBox box, String param) {
+        double width = box.getPrefWidth();
+        switch (param) {
+            case "fix":
+                Label fix_label = new Label("固定");
+                ComboBox<String> fix_selector = new ComboBox<>(FXCollections.observableArrayList("On", "Off"));
+                fix_label.setPrefWidth(width);
+                fix_selector.setPrefWidth(width);
+                fix_selector.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> ov, String old_v, String new_v) {
+                        switch (old_v) {
+                            case "On":
+                                self.setParameter("fix", "true");
+                                break;
+                            case "Off":
+                                self.setParameter("fix", "false");
+                                break;
+                        }
+                    }
+                });
+                box.getChildren().addAll(fix_label, fix_selector);
+                break;
+            case "width":
+                Label width_label = new Label("横幅");
+                CheckBox width_match_parent = new CheckBox("外側に合わせる");
+                CheckBox width_wrap_content = new CheckBox("内側に合わせる");
+                TextField width_px_editor = new TextField("ピクセルを指定する");
+                width_label.setPrefWidth(width);
+                width_wrap_content.setPrefWidth(width);
+                width_match_parent.setPrefWidth(width);
+                width_px_editor.setPrefWidth(width);
+
+                width_wrap_content.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> ov, Boolean o, Boolean n) {
+                        if (n) {
+                            self.setParameter("width", "wrap_content");
+                            Carbonara.Renderer().render();
+                        }
+                    }
+                });
+                width_match_parent.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> ov, Boolean o, Boolean n) {
+                        if (n) {
+                            self.setParameter("width", "match_parent");
+                            Carbonara.Renderer().render();
+                        }
+                    }
+                });
+                width_px_editor.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> ov, String o, String n) {
+                        try {
+                            int width = Integer.parseInt(n);
+                            self.setParameter("width", width + "px");
+                            Carbonara.Renderer().render();
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
+                box.getChildren().addAll(width_label, width_match_parent, width_wrap_content, width_px_editor);
+                break;
+            case "height":
+                Label height_label = new Label("高さ");
+                CheckBox height_match_parent = new CheckBox("外側に合わせる");
+                CheckBox height_wrap_content = new CheckBox("内側に合わせる");
+                TextField height_px_editor = new TextField("ピクセルを指定する");
+                height_label.setPrefWidth(width);
+                height_wrap_content.setPrefWidth(width);
+                height_match_parent.setPrefWidth(width);
+                height_px_editor.setPrefWidth(width);
+
+                height_wrap_content.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> ov, Boolean o, Boolean n) {
+                        if (n) {
+                            self.setParameter("height", "wrap_content");
+                            Carbonara.Renderer().render();
+                        }
+                    }
+                });
+                height_match_parent.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> ov, Boolean o, Boolean n) {
+                        if (n) {
+                            self.setParameter("height", "match_parent");
+                            Carbonara.Renderer().render();
+                        }
+                    }
+                });
+                height_px_editor.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> ov, String o, String n) {
+                        try {
+                            int width = Integer.parseInt(n);
+                            self.setParameter("height", width + "px");
+                            Carbonara.Renderer().render();
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
+                box.getChildren().addAll(height_label, height_match_parent, height_wrap_content, height_px_editor);
+                break;
+        }
     }
 }

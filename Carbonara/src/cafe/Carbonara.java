@@ -101,4 +101,10 @@ public class Carbonara extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    public static MainController AppController(){
+        return Carbonara.controller;
+    }
+    public static PageRenderer Renderer(){
+        return Carbonara.renderer;
+    }
 }

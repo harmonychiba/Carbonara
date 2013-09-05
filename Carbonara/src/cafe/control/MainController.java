@@ -28,11 +28,14 @@ public class MainController implements EventHandler {
     private PageRenderer renderer;
     private Document document;
     private int currentPageIndex;
+    private boolean existingTagMode;
 
     public MainController() {
         this.self = this;
 
         self.document = new Document();
+        
+        self.existingTagMode = false;
     }
 
     public void setContentPane(ContentPane root) {
@@ -133,5 +136,12 @@ public class MainController implements EventHandler {
         page.addTag(tag_header);
 
         return document.getPageCount() - 1;
+    }
+
+    public void onPreviewPaneClicked(Tag event_source) {
+        self.root.onPreviewPaneClicked(event_source);
+    }
+    public void setExistingMode(boolean mode){
+        self.existingTagMode = mode;
     }
 }
