@@ -65,6 +65,7 @@ public class ContentPane extends AnchorPane {
     public static final String TAG_CONTENT_ID = "ID:TAG_CONTENT";
     public static final String TAG_TITLE_ID = "ID:TAG_TITLE";
     public static final String TAG_PARAGRAPH_ID = "ID:TAG_PARAGRAPH";
+    public static final String TAG_BUTTON_ID = "ID:TAG_BUTTON";
 
     
     private MainController controller;
@@ -186,18 +187,21 @@ public class ContentPane extends AnchorPane {
         Button tag_icon_header = new Button("Header");
         Button tag_icon_footer = new Button("Footer");
         Button tag_icon_content = new Button("Content");
+        Button tag_icon_button = new Button("Button");
         Button tag_icon_title = new Button("Title");
         Button tag_icon_paragraph = new Button("Paragraph");
 
         tag_icon_header.setId(TAG_HEADER_ID);
         tag_icon_footer.setId(TAG_FOOTER_ID);
         tag_icon_content.setId(TAG_CONTENT_ID);
+        tag_icon_button.setId(TAG_BUTTON_ID);
         tag_icon_title.setId(TAG_TITLE_ID);
         tag_icon_paragraph.setId(TAG_PARAGRAPH_ID);
 
         self.tag_icon_buttons.add(tag_icon_header);
         self.tag_icon_buttons.add(tag_icon_footer);
         self.tag_icon_buttons.add(tag_icon_content);
+        self.tag_icon_buttons.add(tag_icon_button);
         self.tag_icon_buttons.add(tag_icon_title);
         self.tag_icon_buttons.add(tag_icon_paragraph);
 
@@ -227,12 +231,12 @@ public class ContentPane extends AnchorPane {
             });
         }
 
-        self.tag_icon_container.getChildren().addAll(tag_icon_header, tag_icon_footer, tag_icon_content, tag_icon_title, tag_icon_paragraph);
+        self.tag_icon_container.getChildren().addAll(tag_icon_header, tag_icon_footer, tag_icon_content,tag_icon_button, tag_icon_title, tag_icon_paragraph);
 
-        for (Button tag_icon_button : self.tag_icon_buttons) {
-            tag_icon_button.setOnAction(self.controller);
+        for (Button _tag_icon_button : self.tag_icon_buttons) {
+            _tag_icon_button.setOnAction(self.controller);
 
-            tag_icon_button.setEffect(new Reflection(0, ((ContentPane.TAG_ICON_CONTAINER_HEIGHT - ContentPane.TAG_ICON_BUTTON_HEIGHT) / 2.0f) / ContentPane.TAG_ICON_BUTTON_HEIGHT, 0.3f, 0.0f));
+            _tag_icon_button.setEffect(new Reflection(0, ((ContentPane.TAG_ICON_CONTAINER_HEIGHT - ContentPane.TAG_ICON_BUTTON_HEIGHT) / 2.0f) / ContentPane.TAG_ICON_BUTTON_HEIGHT, 0.3f, 0.0f));
         }
 
         self.getChildren().add(self.tag_icon_container);

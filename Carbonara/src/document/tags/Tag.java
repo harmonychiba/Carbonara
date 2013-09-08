@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javafx.animation.Timeline;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -34,15 +35,16 @@ public abstract class Tag {
     public static final String CONTENT = "TAG_CONTENT";
     public static final String TITLE = "TAG_TITLE";
     public static final String PARAGRAPH = "TAG_PARAGRAPH";
+    public static final String BUTTON = "TAG_BUTTON";
     protected final Tag self;
     private String tag_name;
-    private String class_name;
-    private String id_name;
+    protected String class_name;
+    protected String id_name;
     private HashMap<String, String> parameters;
     private String text;
     protected TagDataChangeListener listener;
     private boolean containable;
-    private ArrayList<Tag> children;
+    protected ArrayList<Tag> children;
     private ArrayList<Float> heights_of_children_preview;
     protected Pane preview_pane;
     protected Pane child_preview;
@@ -63,6 +65,9 @@ public abstract class Tag {
         self.parameters = new HashMap<>();
 
         self.containable = false;
+        
+        self.class_name = "";
+        self.id_name = "";
 
         self.text = "";
     }
@@ -168,6 +173,24 @@ public abstract class Tag {
                     MainController controller = Carbonara.AppController();
 
                     controller.onPreviewPaneClicked(self);
+                    
+                    boolean consumed = false;
+                    float clicked_x = (float) t.getX();
+                    float clicked_y = (float) t.getY();
+                    for(Tag child : self.children){
+                        if(child.preview_pane != null){
+                            Bounds layout = child.preview_pane.getBoundsInParent();
+                            System.out.println("("+layout.getMinX()+","+layout.getMaxX()+","+layout.getMinY()+","+layout.getMaxY()+")");
+                            if(clicked_x >= layout.getMinX() && clicked_x <= layout.getMaxX() && clicked_y >= layout.getMinY() && clicked_y <= layout.getMaxY()){
+                                child.preview_pane.onMouseClickedProperty().getValue().handle(t);
+                                consumed = true;
+                                break;
+                            }
+                        }
+                    }
+                    if(!consumed){
+                        controller.onPreviewPaneClicked(self);
+                    }
                 }
             });
             self.preview_pane.setOnDragDetected(new EventHandler<MouseEvent>() {
@@ -206,4 +229,5 @@ public abstract class Tag {
             });
         }
     }
+    public abstract String generateHTML();
 }

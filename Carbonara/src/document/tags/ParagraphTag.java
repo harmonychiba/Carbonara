@@ -12,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.AnchorPane;
@@ -25,20 +26,20 @@ import javafx.scene.text.Font;
  *
  * @author chibayuuki
  */
-public class HeaderTag extends Tag {
+public class ParagraphTag extends Tag {
 
     public static final float DEFAULT_HEADER_HEIGHT = 50.0f;
     public static final float DEFAULT_HEADER_WORD_SIZE = 32.0f;
 
-    public HeaderTag() {
-        super(Tag.HEADER);
+    public ParagraphTag() {
+        super(Tag.PARAGRAPH);
         initializeParameters();
         self.preview_pane = new AnchorPane();
         self.initPreviewPane();
     }
 
     private void initializeParameters() {
-        self.setParameter("word", "HEADER");
+        self.setParameter("word", "Paragraph");
         self.setParameter("image", "null");
         self.setParameter("width", "match_parent");
         self.setParameter("height", "wrap_content");
@@ -50,7 +51,7 @@ public class HeaderTag extends Tag {
         pane.getChildren().clear();
 
         Label text = new Label(self.getParameter("word"));
-        Font font = new Font(HeaderTag.DEFAULT_HEADER_WORD_SIZE);
+        Font font = new Font(ParagraphTag.DEFAULT_HEADER_WORD_SIZE);
         text.setFont(font);
         text.setTextFill(Color.WHITE);
 
@@ -72,15 +73,19 @@ public class HeaderTag extends Tag {
             background.setHeight(parentHeight);
             text.setPrefHeight(parentHeight);
         } else if (self.getParameter("height").equals("wrap_content")) {
-            if (text.getHeight() < HeaderTag.DEFAULT_HEADER_HEIGHT) {
-                text.setPrefHeight(HeaderTag.DEFAULT_HEADER_HEIGHT);
+            if (text.getHeight() < ParagraphTag.DEFAULT_HEADER_HEIGHT) {
+                text.setPrefHeight(ParagraphTag.DEFAULT_HEADER_HEIGHT);
             }
             background.setHeight(text.getPrefHeight());
         } else if (self.getParameter("height").endsWith("px")) {
             background.setHeight(Double.parseDouble(self.getParameter("height").split("px")[0]));
             text.setPrefHeight(background.getHeight());
         }
-        background.setFill(Color.GRAY);
+        background.setOpacity(0.0f);
+        /*background.setFill(Color.GRAY);
+        
+        background.setArcHeight(background.getHeight()/2.0f);
+        background.setArcWidth(background.getHeight()/2.0f);*/
 
         pane.getChildren().add(background);
         pane.getChildren().add(text);
@@ -224,7 +229,7 @@ public class HeaderTag extends Tag {
                 break;
             case "word":
                 Label word_label = new Label("文字");
-                TextField word_editor = new TextField("文字を指定する");
+                TextArea word_editor = new TextArea("文字を指定する");
                 word_editor.textProperty().addListener(new ChangeListener<String>() {
                     @Override
                     public void changed(ObservableValue<? extends String> ov, String o, String n) {
@@ -239,7 +244,7 @@ public class HeaderTag extends Tag {
 
     @Override
     public String generateHTML() {
-String html = "<div data-role=\"header\" ";
+String html = "<p ";
         if(self.class_name.equalsIgnoreCase("")){
             html += "class=\""+self.class_name+"\" ";
         }
@@ -248,9 +253,10 @@ String html = "<div data-role=\"header\" ";
         }
         html+=">\n";
         
-        html+="<h2>"+self.getParameter("word")+"</h2>";
+        html+=self.getParameter("word").replace("\n", "\n<br>\n")+"\n";
         
-        html+="</div>\n";
+        html+="</p>\n";
         
-        return html;    }
+        return html;    
+    }
 }

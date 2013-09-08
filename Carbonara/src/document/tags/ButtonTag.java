@@ -25,20 +25,21 @@ import javafx.scene.text.Font;
  *
  * @author chibayuuki
  */
-public class HeaderTag extends Tag {
+public class ButtonTag extends Tag {
 
     public static final float DEFAULT_HEADER_HEIGHT = 50.0f;
     public static final float DEFAULT_HEADER_WORD_SIZE = 32.0f;
 
-    public HeaderTag() {
-        super(Tag.HEADER);
+    public ButtonTag() {
+        super(Tag.BUTTON);
         initializeParameters();
         self.preview_pane = new AnchorPane();
         self.initPreviewPane();
     }
 
     private void initializeParameters() {
-        self.setParameter("word", "HEADER");
+        self.setParameter("word", "BUTTON");
+        self.setParameter("link","#");
         self.setParameter("image", "null");
         self.setParameter("width", "match_parent");
         self.setParameter("height", "wrap_content");
@@ -50,7 +51,7 @@ public class HeaderTag extends Tag {
         pane.getChildren().clear();
 
         Label text = new Label(self.getParameter("word"));
-        Font font = new Font(HeaderTag.DEFAULT_HEADER_WORD_SIZE);
+        Font font = new Font(ButtonTag.DEFAULT_HEADER_WORD_SIZE);
         text.setFont(font);
         text.setTextFill(Color.WHITE);
 
@@ -72,15 +73,18 @@ public class HeaderTag extends Tag {
             background.setHeight(parentHeight);
             text.setPrefHeight(parentHeight);
         } else if (self.getParameter("height").equals("wrap_content")) {
-            if (text.getHeight() < HeaderTag.DEFAULT_HEADER_HEIGHT) {
-                text.setPrefHeight(HeaderTag.DEFAULT_HEADER_HEIGHT);
+            if (text.getHeight() < ButtonTag.DEFAULT_HEADER_HEIGHT) {
+                text.setPrefHeight(ButtonTag.DEFAULT_HEADER_HEIGHT);
             }
             background.setHeight(text.getPrefHeight());
         } else if (self.getParameter("height").endsWith("px")) {
             background.setHeight(Double.parseDouble(self.getParameter("height").split("px")[0]));
             text.setPrefHeight(background.getHeight());
         }
-        background.setFill(Color.GRAY);
+        background.setFill(Color.LIGHTGRAY);
+
+        background.setArcHeight(background.getHeight() / 2.0f);
+        background.setArcWidth(background.getHeight() / 2.0f);
 
         pane.getChildren().add(background);
         pane.getChildren().add(text);
@@ -234,23 +238,36 @@ public class HeaderTag extends Tag {
                 });
                 box.getChildren().addAll(word_label, word_editor);
                 break;
+            case "link":
+                Label link_label = new Label("文字");
+                TextField link_editor = new TextField("文字を指定する");
+                link_editor.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> ov, String o, String n) {
+                        self.setParameter("link", n);
+                        Carbonara.Renderer().render();
+                    }
+                });
+                box.getChildren().addAll(link_label, link_editor);
+                break;
         }
     }
 
     @Override
     public String generateHTML() {
-String html = "<div data-role=\"header\" ";
-        if(self.class_name.equalsIgnoreCase("")){
-            html += "class=\""+self.class_name+"\" ";
+        String html = "<a data-role=\"button\" href=\""+self.getParameter("link")+"\" ";
+        if (self.class_name.equalsIgnoreCase("")) {
+            html += "class=\"" + self.class_name + "\" ";
         }
-        if(self.id_name.equalsIgnoreCase("")){
-            html += "class=\""+self.id_name+"\" ";
+        if (self.id_name.equalsIgnoreCase("")) {
+            html += "class=\"" + self.id_name + "\" ";
         }
-        html+=">\n";
-        
-        html+="<h2>"+self.getParameter("word")+"</h2>";
-        
-        html+="</div>\n";
-        
-        return html;    }
+        html += ">\n";
+
+        html += "<h4>" + self.getParameter("word") + "</h4>";
+
+        html += "</div>\n";
+
+        return html;
+    }
 }

@@ -4,6 +4,7 @@
  */
 package document;
 
+import java.util.HashMap;
 import cafe.control.TagDataChangeEvent;
 import cafe.control.TagDataChangeListener;
 import java.util.ArrayList;
@@ -57,5 +58,14 @@ public class Document {
 
     public int getPageCount() {
         return self.pages.size();
+    }
+    
+    public HashMap<String,String> generateHTMLs(){
+        HashMap<String,String> htmls = new HashMap<>();
+        for(Page page:self.pages){
+            htmls.put(page.getName(), page.generateHTML());
+            System.out.println(page.generateHTML());
+        }
+        return htmls;
     }
 }

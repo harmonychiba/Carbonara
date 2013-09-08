@@ -32,7 +32,6 @@ public class FooterTag extends Tag{
     }
 
     private void initializeParameters() {
-        self.setParameter("fix", "true");
         self.setParameter("word", "FOOTER");
         self.setParameter("image", "null");
         self.setParameter("width", "match_parent");
@@ -119,5 +118,23 @@ public class FooterTag extends Tag{
     @Override
     public void getParameterEditor(VBox box, String param) {
 
+    }
+
+    @Override
+    public String generateHTML() {
+        String html = "<div data-role=\"footer\" ";
+        if(self.class_name.equalsIgnoreCase("")){
+            html += "class=\""+self.class_name+"\" ";
+        }
+        if(self.id_name.equalsIgnoreCase("")){
+            html += "class=\""+self.id_name+"\" ";
+        }
+        html+=">\n";
+        
+        html+="<h4>"+self.getParameter("word")+"</h4>";
+        
+        html+="</div>\n";
+        
+        return html;
     }
 }

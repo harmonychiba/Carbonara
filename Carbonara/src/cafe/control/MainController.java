@@ -4,12 +4,15 @@
  */
 package cafe.control;
 
+import java.util.HashMap;
 import cafe.view.ContentPane;
 import document.Document;
 import document.Page;
+import document.tags.ButtonTag;
 import document.tags.ContentTag;
 import document.tags.FooterTag;
 import document.tags.HeaderTag;
+import document.tags.ParagraphTag;
 import document.tags.Tag;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -74,6 +77,7 @@ public class MainController implements EventHandler {
                 case ContentPane.MENU_ICON_SAVE_AS_ID:
                     break;
                 case ContentPane.MENU_ICON_COMMIT_ID:
+                    self.commit();
                     break;
                 case ContentPane.PAGE_ICON_BUTTON_NEW_ID:
                     int index = self.addNewPage("untitled");
@@ -111,6 +115,22 @@ public class MainController implements EventHandler {
                     self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
                 }
                 break;
+            case Tag.PARAGRAPH:
+                newTag = new ParagraphTag();
+                if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
+                    self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
+                } else {
+                    self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
+                }
+                break;
+            case Tag.BUTTON:
+                newTag = new ButtonTag();
+                if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
+                    self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
+                } else {
+                    self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
+                }
+                break;
         }
     }
 
@@ -143,5 +163,12 @@ public class MainController implements EventHandler {
     }
     public void setExistingMode(boolean mode){
         self.existingTagMode = mode;
+    }
+
+    private void commit() {
+        HashMap<String,String> htmls = self.document.generateHTMLs();
+        for(String html:htmls.values()){
+            System.out.println("\n----------------------html-------------------------\n\n"+html+"\n\n\n");
+        }
     }
 }

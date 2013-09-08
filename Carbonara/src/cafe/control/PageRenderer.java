@@ -6,9 +6,11 @@ package cafe.control;
 
 import cafe.view.ContentPane;
 import document.Page;
+import document.tags.ButtonTag;
 import document.tags.ContentTag;
 import document.tags.FooterTag;
 import document.tags.HeaderTag;
+import document.tags.ParagraphTag;
 import document.tags.Tag;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -147,6 +149,7 @@ public class PageRenderer implements TagDataChangeListener {
             public void handle(DragEvent event) {
                 AnchorPane source = (AnchorPane) event.getSource();
                 if (event.getGestureSource() != source && event.getDragboard().hasString()) {
+
                     String tag_type = event.getDragboard().getString().split(":")[1];
                     Tag temp_tag = null;
                     switch (tag_type) {
@@ -158,6 +161,12 @@ public class PageRenderer implements TagDataChangeListener {
                             break;
                         case Tag.CONTENT:
                             temp_tag = new ContentTag();
+                            break;
+                        case Tag.BUTTON:
+                            temp_tag = new ButtonTag();
+                            break;
+                        case Tag.PARAGRAPH:
+                            temp_tag = new ParagraphTag();
                             break;
                     }
                     if (temp_tag != null) {

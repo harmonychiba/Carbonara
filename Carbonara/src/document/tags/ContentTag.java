@@ -126,6 +126,12 @@ public class ContentTag extends Tag {
                     case Tag.CONTENT:
                         temp_tag = new ContentTag();
                         break;
+                    case Tag.BUTTON:
+                        temp_tag = new ButtonTag();
+                        break;
+                    case Tag.PARAGRAPH:
+                        temp_tag = new ParagraphTag();
+                        break;
                 }
                 if (self.temp_tag != null) {
                     self.child_preview = self.temp_tag.generateView((float) self.preview_pane.getWidth(), (float) self.preview_pane.getHeight());
@@ -248,6 +254,12 @@ public class ContentTag extends Tag {
                     break;
                 case Tag.CONTENT:
                     new_tag = new ContentTag();
+                    break;
+                case Tag.BUTTON:
+                    new_tag = new ButtonTag();
+                    break;
+                case Tag.PARAGRAPH:
+                    new_tag = new ParagraphTag();
                     break;
             }
             if (new_tag != null) {
@@ -376,5 +388,23 @@ public class ContentTag extends Tag {
                 box.getChildren().addAll(height_label, height_match_parent, height_wrap_content, height_px_editor);
                 break;
         }
+    }
+
+    @Override
+    public String generateHTML() {
+        String html = "<div data-role=\"content\" ";
+        if(self.class_name.equalsIgnoreCase("")){
+            html += "class=\""+self.class_name+"\" ";
+        }
+        if(self.id_name.equalsIgnoreCase("")){
+            html += "class=\""+self.id_name+"\" ";
+        }
+        html+=">\n";
+            for(Tag child:self.children){
+                html+=child.generateHTML();
+            }
+        html+="</div>\n";
+        
+        return html;
     }
 }
