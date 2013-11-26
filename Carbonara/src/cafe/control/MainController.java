@@ -15,6 +15,7 @@ import document.tags.FooterTag;
 import document.tags.HeaderTag;
 import document.tags.ParagraphTag;
 import document.tags.Tag;
+import document.tags.TimelineTag;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -134,6 +135,14 @@ public class MainController implements EventHandler {
                 break;
             case Tag.COUPON:
                 newTag = new CouponTag();
+                if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
+                    self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
+                } else {
+                    self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
+                }
+                break;
+            case Tag.TIMELINE:
+                newTag = new TimelineTag();
                 if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
                     self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
                 } else {

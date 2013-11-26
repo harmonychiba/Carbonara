@@ -37,6 +37,7 @@ public abstract class Tag {
     public static final String PARAGRAPH = "TAG_PARAGRAPH";
     public static final String BUTTON = "TAG_BUTTON";
     public static final String COUPON = "TAG_COUPON";
+    public static final String TIMELINE = "TAG_TIMELINE";
     protected final Tag self;
     private String tag_name;
     protected String class_name;

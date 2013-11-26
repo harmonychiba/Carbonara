@@ -13,6 +13,7 @@ import document.tags.FooterTag;
 import document.tags.HeaderTag;
 import document.tags.ParagraphTag;
 import document.tags.Tag;
+import document.tags.TimelineTag;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -171,6 +172,9 @@ public class PageRenderer implements TagDataChangeListener {
                             break;
                         case Tag.COUPON:
                             temp_tag = new CouponTag();
+                            break;
+                        case Tag.TIMELINE:
+                            temp_tag = new TimelineTag();
                             break;
                     }
                     if (temp_tag != null) {

@@ -135,6 +135,9 @@ public class ContentTag extends Tag {
                     case Tag.COUPON:
                         temp_tag = new CouponTag();
                         break;
+                    case Tag.TIMELINE:
+                        temp_tag = new TimelineTag();
+                        break;
                 }
                 if (self.temp_tag != null) {
                     self.child_preview = self.temp_tag.generateView((float) self.preview_pane.getWidth(), (float) self.preview_pane.getHeight());
@@ -266,6 +269,9 @@ public class ContentTag extends Tag {
                     break;
                 case Tag.COUPON:
                     new_tag = new CouponTag();
+                    break;
+                case Tag.TIMELINE:
+                    new_tag = new TimelineTag();
                     break;
             }
             if (new_tag != null) {

@@ -67,6 +67,7 @@ public class ContentPane extends AnchorPane {
     public static final String TAG_PARAGRAPH_ID = "ID:TAG_PARAGRAPH";
     public static final String TAG_BUTTON_ID = "ID:TAG_BUTTON";
     public static final String TAG_COUPON_ID = "ID:TAG_COUPON";
+    public static final String TAG_TIMELINE_ID = "ID:TAG_TIMELINE";
 
     
     private MainController controller;
@@ -192,6 +193,7 @@ public class ContentPane extends AnchorPane {
         Button tag_icon_title = new Button("Title");
         Button tag_icon_paragraph = new Button("Paragraph");
         Button tag_icon_coupon = new Button("Coupon");
+        Button tag_icon_timeline = new Button("Timeline");
 
         tag_icon_header.setId(TAG_HEADER_ID);
         tag_icon_footer.setId(TAG_FOOTER_ID);
@@ -200,6 +202,7 @@ public class ContentPane extends AnchorPane {
         tag_icon_title.setId(TAG_TITLE_ID);
         tag_icon_paragraph.setId(TAG_PARAGRAPH_ID);
         tag_icon_coupon.setId(TAG_COUPON_ID);
+        tag_icon_timeline.setId(TAG_TIMELINE_ID);
 
         self.tag_icon_buttons.add(tag_icon_header);
         self.tag_icon_buttons.add(tag_icon_footer);
@@ -208,6 +211,7 @@ public class ContentPane extends AnchorPane {
         self.tag_icon_buttons.add(tag_icon_title);
         self.tag_icon_buttons.add(tag_icon_paragraph);
         self.tag_icon_buttons.add(tag_icon_coupon);
+        self.tag_icon_buttons.add(tag_icon_timeline);
 
         for (Button tag_icon : self.tag_icon_buttons) {
             tag_icon.setOnDragDetected(new EventHandler<MouseEvent>() {
@@ -235,7 +239,7 @@ public class ContentPane extends AnchorPane {
             });
         }
 
-        self.tag_icon_container.getChildren().addAll(tag_icon_header, tag_icon_footer, tag_icon_content,tag_icon_button, tag_icon_title, tag_icon_paragraph,tag_icon_coupon);
+        self.tag_icon_container.getChildren().addAll(tag_icon_header, tag_icon_footer, tag_icon_content,tag_icon_button, tag_icon_title, tag_icon_paragraph,tag_icon_coupon,tag_icon_timeline);
 
         for (Button _tag_icon_button : self.tag_icon_buttons) {
             _tag_icon_button.setOnAction(self.controller);
