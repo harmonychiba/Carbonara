@@ -8,6 +8,7 @@ import cafe.view.ContentPane;
 import document.Page;
 import document.tags.ButtonTag;
 import document.tags.ContentTag;
+import document.tags.CouponTag;
 import document.tags.FooterTag;
 import document.tags.HeaderTag;
 import document.tags.ParagraphTag;
@@ -168,6 +169,8 @@ public class PageRenderer implements TagDataChangeListener {
                         case Tag.PARAGRAPH:
                             temp_tag = new ParagraphTag();
                             break;
+                        case Tag.COUPON:
+                            temp_tag = new CouponTag();
                     }
                     if (temp_tag != null) {
                         self.preview_tag = temp_tag.generateView((float) self.page_preview.getPrefWidth(), (float) self.page_preview.getPrefHeight());

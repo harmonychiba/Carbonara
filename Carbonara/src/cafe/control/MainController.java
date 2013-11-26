@@ -131,6 +131,13 @@ public class MainController implements EventHandler {
                     self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
                 }
                 break;
+            case Tag.COUPON:
+                newTag = new ContentTag();
+                if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
+                    self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
+                } else {
+                    self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
+                }
         }
     }
 
