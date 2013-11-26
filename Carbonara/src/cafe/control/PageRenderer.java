@@ -168,6 +168,9 @@ public class PageRenderer implements TagDataChangeListener {
                         case Tag.PARAGRAPH:
                             temp_tag = new ParagraphTag();
                             break;
+                        case Tag.COUPON:
+                            temp_tag = new ContentTag();
+                            break;
                     }
                     if (temp_tag != null) {
                         self.preview_tag = temp_tag.generateView((float) self.page_preview.getPrefWidth(), (float) self.page_preview.getPrefHeight());
