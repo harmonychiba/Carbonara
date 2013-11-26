@@ -20,28 +20,30 @@ import javafx.scene.text.Font;
  *
  * @author Takafumi
  */
-public class TimelineTag extends Tag{
+public class DMMTag extends Tag{
+    
+    //名付け親：渡邊寛謙
     
     public static final float DEFAULT_HEADER_HEIGHT = 50.0f;
     public static final float DEFAULT_HEADER_WORD_SIZE = 32.0f;
     
-    public TimelineTag(){
-        super(Tag.TIMELINE);
+    
+    public DMMTag(){
+        super(Tag.DMM);
         initializeParameters();
         self.preview_pane = new AnchorPane();
         self.initPreviewPane();
-        
     }
     
     private void initializeParameters(){
-        self.setParameter("word", "Timeline");
+        self.setParameter("word", "DMM R-18");
         self.setParameter("link","#");
         self.setParameter("image", "null");
         self.setParameter("width", "match_parent");
         self.setParameter("height", "wrap_content");
         
     }
-    
+
     @Override
     public Pane generateView(float parentWidth, float parentHeight) {
         Pane pane = self.preview_pane;
@@ -78,7 +80,7 @@ public class TimelineTag extends Tag{
             background.setHeight(Double.parseDouble(self.getParameter("height").split("px")[0]));
             text.setPrefHeight(background.getHeight());
         }
-        background.setFill(Color.LIGHTGRAY);
+        background.setFill(Color.RED);//色の選択
 
         background.setArcHeight(background.getHeight() / 2.0f);
         background.setArcWidth(background.getHeight() / 2.0f);
@@ -87,7 +89,6 @@ public class TimelineTag extends Tag{
         pane.getChildren().add(text);
 
         return pane;
-        
     }
 
     @Override
@@ -114,7 +115,7 @@ public class TimelineTag extends Tag{
 
     @Override
     public void dragDrop(String id) {
-    }
+        }
 
     @Override
     public void getParameterEditor(VBox box, String param) {

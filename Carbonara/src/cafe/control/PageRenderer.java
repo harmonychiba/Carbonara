@@ -9,11 +9,16 @@ import document.Page;
 import document.tags.ButtonTag;
 import document.tags.ContentTag;
 import document.tags.CouponTag;
+import document.tags.DMMTag;
 import document.tags.FooterTag;
 import document.tags.HeaderTag;
+import document.tags.MapTag;
+import document.tags.MovieTag;
 import document.tags.ParagraphTag;
+import document.tags.ShareTag;
 import document.tags.Tag;
 import document.tags.TimelineTag;
+import document.tags.TweetTag;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -173,9 +178,25 @@ public class PageRenderer implements TagDataChangeListener {
                         case Tag.COUPON:
                             temp_tag = new CouponTag();
                             break;
+                        case Tag.DMM:
+                           temp_tag = new DMMTag();
+                           break;
+                        case Tag.SHARE:
+                            temp_tag = new ShareTag();
+                            break;
                         case Tag.TIMELINE:
                             temp_tag = new TimelineTag();
                             break;
+                        case Tag.TWEET:
+                            temp_tag = new TweetTag();
+                            break;
+                        case Tag.MOVIE:
+                            temp_tag = new MovieTag();
+                            break;
+                        case Tag.MAP:
+                            temp_tag = new MapTag();
+                            break;
+                       
                     }
                     if (temp_tag != null) {
                         self.preview_tag = temp_tag.generateView((float) self.page_preview.getPrefWidth(), (float) self.page_preview.getPrefHeight());

@@ -1,9 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package document.tags;
 
 import javafx.geometry.Pos;
@@ -18,30 +16,27 @@ import javafx.scene.text.Font;
 
 /**
  *
- * @author Takafumi
+ * @author hironori
  */
-public class TimelineTag extends Tag{
-    
+public class MovieTag extends Tag{
     public static final float DEFAULT_HEADER_HEIGHT = 50.0f;
     public static final float DEFAULT_HEADER_WORD_SIZE = 32.0f;
     
-    public TimelineTag(){
-        super(Tag.TIMELINE);
+    public MovieTag() {
+        super(Tag.MOVIE);
         initializeParameters();
         self.preview_pane = new AnchorPane();
         self.initPreviewPane();
-        
     }
-    
-    private void initializeParameters(){
-        self.setParameter("word", "Timeline");
+
+    private void initializeParameters() {
+        self.setParameter("word", "Movie");
         self.setParameter("link","#");
         self.setParameter("image", "null");
         self.setParameter("width", "match_parent");
         self.setParameter("height", "wrap_content");
-        
     }
-    
+
     @Override
     public Pane generateView(float parentWidth, float parentHeight) {
         Pane pane = self.preview_pane;
@@ -87,7 +82,6 @@ public class TimelineTag extends Tag{
         pane.getChildren().add(text);
 
         return pane;
-        
     }
 
     @Override
@@ -114,6 +108,7 @@ public class TimelineTag extends Tag{
 
     @Override
     public void dragDrop(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

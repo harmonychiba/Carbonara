@@ -28,7 +28,7 @@ public class MapTag extends Tag{
         self.initPreviewPane();
     }
     private void initializeParameters(){
-        self.setParameter("word", "TIMELINE");
+        self.setParameter("word", "Map");
         self.setParameter("link","#");
         self.setParameter("image", "null");
         self.setParameter("width", "match_parent");

@@ -1,9 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package document.tags;
 
 import javafx.geometry.Pos;
@@ -18,30 +16,27 @@ import javafx.scene.text.Font;
 
 /**
  *
- * @author Takafumi
+ * @author hironori
  */
-public class TimelineTag extends Tag{
-    
+public class ShareTag extends Tag{
     public static final float DEFAULT_HEADER_HEIGHT = 50.0f;
     public static final float DEFAULT_HEADER_WORD_SIZE = 32.0f;
     
-    public TimelineTag(){
-        super(Tag.TIMELINE);
+    public ShareTag() {
+        super(Tag.SHARE);
         initializeParameters();
         self.preview_pane = new AnchorPane();
         self.initPreviewPane();
-        
     }
     
     private void initializeParameters(){
-        self.setParameter("word", "Timeline");
+        self.setParameter("word", "Share");
         self.setParameter("link","#");
         self.setParameter("image", "null");
         self.setParameter("width", "match_parent");
         self.setParameter("height", "wrap_content");
-        
     }
-    
+
     @Override
     public Pane generateView(float parentWidth, float parentHeight) {
         Pane pane = self.preview_pane;
@@ -78,7 +73,7 @@ public class TimelineTag extends Tag{
             background.setHeight(Double.parseDouble(self.getParameter("height").split("px")[0]));
             text.setPrefHeight(background.getHeight());
         }
-        background.setFill(Color.LIGHTGRAY);
+        background.setFill(Color.BEIGE);//色の選択
 
         background.setArcHeight(background.getHeight() / 2.0f);
         background.setArcWidth(background.getHeight() / 2.0f);
@@ -87,7 +82,6 @@ public class TimelineTag extends Tag{
         pane.getChildren().add(text);
 
         return pane;
-        
     }
 
     @Override
@@ -114,6 +108,7 @@ public class TimelineTag extends Tag{
 
     @Override
     public void dragDrop(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
