@@ -133,7 +133,7 @@ public class ContentTag extends Tag {
                         temp_tag = new ParagraphTag();
                         break;
                     case Tag.COUPON:
-                        temp_tag = new ContentTag();
+                        temp_tag = new CouponTag();
                         break;
                 }
                 if (self.temp_tag != null) {
