@@ -12,7 +12,6 @@ import document.tags.FooterTag;
 import document.tags.HeaderTag;
 import document.tags.ParagraphTag;
 import document.tags.Tag;
-import document.tags.TestTag;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -168,9 +167,6 @@ public class PageRenderer implements TagDataChangeListener {
                             break;
                         case Tag.PARAGRAPH:
                             temp_tag = new ParagraphTag();
-                            break;
-                        case Tag.TEST:
-                            temp_tag = new TestTag();
                             break;
                     }
                     if (temp_tag != null) {
