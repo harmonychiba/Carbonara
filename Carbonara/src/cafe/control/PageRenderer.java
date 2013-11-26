@@ -12,6 +12,7 @@ import document.tags.CouponTag;
 import document.tags.FooterTag;
 import document.tags.HeaderTag;
 import document.tags.ParagraphTag;
+import document.tags.ShareTag;
 import document.tags.Tag;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -171,6 +172,9 @@ public class PageRenderer implements TagDataChangeListener {
                             break;
                         case Tag.COUPON:
                             temp_tag = new CouponTag();
+                            break;
+                        case Tag.SHARE:
+                            temp_tag = new ShareTag();
                             break;
                     }
                     if (temp_tag != null) {
