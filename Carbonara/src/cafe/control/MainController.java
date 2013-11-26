@@ -13,6 +13,7 @@ import document.tags.ContentTag;
 import document.tags.FooterTag;
 import document.tags.HeaderTag;
 import document.tags.ParagraphTag;
+import document.tags.TestTag;
 import document.tags.Tag;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -125,6 +126,14 @@ public class MainController implements EventHandler {
                 break;
             case Tag.BUTTON:
                 newTag = new ButtonTag();
+                if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
+                    self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
+                } else {
+                    self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
+                }
+                break;
+            case Tag.TEST:
+                newTag = new TestTag();
                 if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
                     self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
                 } else {

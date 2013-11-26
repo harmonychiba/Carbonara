@@ -132,6 +132,9 @@ public class ContentTag extends Tag {
                     case Tag.PARAGRAPH:
                         temp_tag = new ParagraphTag();
                         break;
+                    case Tag.TEST:
+                        temp_tag = new TestTag();
+                        break;
                 }
                 if (self.temp_tag != null) {
                     self.child_preview = self.temp_tag.generateView((float) self.preview_pane.getWidth(), (float) self.preview_pane.getHeight());
@@ -260,6 +263,9 @@ public class ContentTag extends Tag {
                     break;
                 case Tag.PARAGRAPH:
                     new_tag = new ParagraphTag();
+                    break;
+                case Tag.TEST:
+                    new_tag = new TestTag();
                     break;
             }
             if (new_tag != null) {
