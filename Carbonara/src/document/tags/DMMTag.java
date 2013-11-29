@@ -6,8 +6,15 @@
 
 package document.tags;
 
+import cafe.Carbonara;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -36,7 +43,7 @@ public class DMMTag extends Tag{
     }
     
     private void initializeParameters(){
-        self.setParameter("word", "DMM R-18");
+        self.setParameter("word", "Youtube");
         self.setParameter("link","#");
         self.setParameter("image", "null");
         self.setParameter("width", "match_parent");
@@ -119,7 +126,22 @@ public class DMMTag extends Tag{
 
     @Override
     public void getParameterEditor(VBox box, String param) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double width = box.getPrefWidth();
+        switch (param) {
+            
+            case "link":
+                Label word_label = new Label("URL");
+                TextField word_editor = new TextField("YoutubeのURLを入力");
+                word_editor.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> ov, String o, String n) {
+                        self.setParameter("link", n);
+                        Carbonara.Renderer().render();
+                    }
+                });
+                box.getChildren().addAll(word_label, word_editor);
+                break;
+        }
     }
 
     @Override
