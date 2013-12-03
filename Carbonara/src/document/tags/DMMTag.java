@@ -135,7 +135,8 @@ public class DMMTag extends Tag{
                 word_editor.textProperty().addListener(new ChangeListener<String>() {
                     @Override
                     public void changed(ObservableValue<? extends String> ov, String o, String n) {
-                        self.setParameter("link", n);
+                        int index = n.indexOf("http://www.youtube.com/watch?v=");
+                        self.setParameter("link", n.substring(+31));
                         Carbonara.Renderer().render();
                     }
                 });
@@ -146,7 +147,8 @@ public class DMMTag extends Tag{
 
     @Override
     public String generateHTML() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String html = "<object width=\"425\" height=\"344\"><param name=\"movie\" value=\"http://www.youtube.com/v/"+self.getParameter("link")+"&hl=ja&fs=1\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/"+self.getParameter("link")+"&hl=ja&fs=1\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"425\" height=\"344\"></embed></object>";
+        return html;
     }
     
 }
