@@ -202,7 +202,7 @@ public class ContentPane extends AnchorPane {
         Button tag_icon_tweet = new Button("Tweet");
         Button tag_icon_movie = new Button("Movie");
         Button tag_icon_map = new Button("Map");
-        Button tag_icon_dmm = new Button("DMM");
+        Button tag_icon_dmm = new Button("Youtube");
 
         tag_icon_header.setId(TAG_HEADER_ID);
         tag_icon_footer.setId(TAG_FOOTER_ID);
