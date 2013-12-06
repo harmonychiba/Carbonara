@@ -15,7 +15,6 @@ import document.tags.DMMTag;
 import document.tags.FooterTag;
 import document.tags.HeaderTag;
 import document.tags.MapTag;
-import document.tags.MovieTag;
 import document.tags.ParagraphTag;
 import document.tags.ShareTag;
 import document.tags.Tag;
@@ -172,14 +171,6 @@ public class MainController implements EventHandler {
                 break;
             case Tag.TWEET:
                 newTag = new TweetTag();
-                if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
-                    self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
-                } else {
-                    self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
-                }
-                break;
-            case Tag.MOVIE:
-                newTag = new MovieTag();
                 if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
                     self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
                 } else {

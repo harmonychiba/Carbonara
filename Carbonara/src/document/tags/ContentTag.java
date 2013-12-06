@@ -150,10 +150,7 @@ public class ContentTag extends Tag {
                     case Tag.MAP:
                         temp_tag = new MapTag();
                         break;
-                    case Tag.MOVIE:
-                        temp_tag = new MovieTag();
-                        break;
-                
+
                 }
                 if (self.temp_tag != null) {
                     self.child_preview = self.temp_tag.generateView((float) self.preview_pane.getWidth(), (float) self.preview_pane.getHeight());
@@ -299,11 +296,7 @@ public class ContentTag extends Tag {
                     break;
                 case Tag.MAP:
                     new_tag = new MapTag();
-                    break;
-                case Tag.MOVIE:
-                    new_tag = new MovieTag();
-                    break;
-                
+                    break;             
             }
             if (new_tag != null) {
                 new_tag.setListener(self.listener);
