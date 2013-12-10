@@ -4,8 +4,12 @@
  */
 package document.tags;
 
+import cafe.Carbonara;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -113,11 +117,18 @@ public class TweetTag extends Tag{
 
     @Override
     public void getParameterEditor(VBox box, String param) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String generateHTML() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Carbonaraで作ったWebページのURLは？
+        //引っこ抜くメソッドが必要
+        String url = "https://github.com/harmonychiba/Carbonara";//一時的にテスト用 URL
+        
+        String html = "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-url=\"";
+        html += url;
+        html += "\" data-lang=\"ja\" data-hashtags=\"CafeSystem\">ツイート</a>\n";
+        html += "<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>";
+        return html;
     }
 }
