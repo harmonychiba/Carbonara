@@ -30,7 +30,7 @@ public class ShareTag extends Tag{
     }
     
     private void initializeParameters(){
-        self.setParameter("word", "Share");
+        self.setParameter("word", "FacebookShare");
         self.setParameter("link","#");
         self.setParameter("image", "null");
         self.setParameter("width", "match_parent");

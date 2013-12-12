@@ -147,7 +147,16 @@ public class DMMTag extends Tag{
 
     @Override
     public String generateHTML() {
-        String html = "<object width=\"425\" height=\"344\"><param name=\"movie\" value=\"http://www.youtube.com/v/"+self.getParameter("link")+"&hl=ja&fs=1\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/"+self.getParameter("link")+"&hl=ja&fs=1\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"425\" height=\"344\"></embed></object>";
+        String html = "<div data-role=\"header\" ";
+        if(self.class_name.equalsIgnoreCase("")){
+            html += "class=\""+self.class_name+"\" ";
+        }
+        if(self.id_name.equalsIgnoreCase("")){
+            html += "class=\""+self.id_name+"\" ";
+        }
+        html+=">\n";
+        html += "<object width=\"425\" height=\"344\">\n<param name=\"movie\" value=\"http://www.youtube.com/v/"+self.getParameter("link")+"&hl=ja&fs=1\">\n</param><param name=\"allowFullScreen\" value=\"true\">\n</param>\n<param name=\"allowscriptaccess\" value=\"always\">\n</param><embed src=\"http://www.youtube.com/v/"+self.getParameter("link")+"&hl=ja&fs=1\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"425\" height=\"344\">\n</embed>\n</object>\n";
+        html+="</div>\n";
         return html;
     }
     
