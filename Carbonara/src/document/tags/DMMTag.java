@@ -1,11 +1,20 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package document.tags;
 
+import cafe.Carbonara;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -16,29 +25,30 @@ import javafx.scene.text.Font;
 
 /**
  *
- * @author hironori
+ * @author Takafumi
  */
-public class ShareTag extends Tag{
+public class DMMTag extends Tag{
+    
+    //名付け親：渡邊寛謙
+    
     public static final float DEFAULT_HEADER_HEIGHT = 50.0f;
     public static final float DEFAULT_HEADER_WORD_SIZE = 32.0f;
     
-    public ShareTag() {
-        super(Tag.SHARE);
+    
+    public DMMTag(){
+        super(Tag.DMM);
         initializeParameters();
         self.preview_pane = new AnchorPane();
         self.initPreviewPane();
     }
     
     private void initializeParameters(){
-<<<<<<< HEAD
-        self.setParameter("word", "Share");
-=======
-        self.setParameter("word", "FacebookShare");
->>>>>>> TagTest
+        self.setParameter("word", "Youtube");
         self.setParameter("link","#");
         self.setParameter("image", "null");
         self.setParameter("width", "match_parent");
         self.setParameter("height", "wrap_content");
+        
     }
 
     @Override
@@ -77,7 +87,7 @@ public class ShareTag extends Tag{
             background.setHeight(Double.parseDouble(self.getParameter("height").split("px")[0]));
             text.setPrefHeight(background.getHeight());
         }
-        background.setFill(Color.BEIGE);//色の選択
+        background.setFill(Color.RED);//色の選択
 
         background.setArcHeight(background.getHeight() / 2.0f);
         background.setArcWidth(background.getHeight() / 2.0f);
@@ -112,17 +122,42 @@ public class ShareTag extends Tag{
 
     @Override
     public void dragDrop(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        }
 
     @Override
     public void getParameterEditor(VBox box, String param) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double width = box.getPrefWidth();
+        switch (param) {
+            
+            case "link":
+                Label word_label = new Label("URL");
+                TextField word_editor = new TextField("YoutubeのURLを入力");
+                word_editor.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> ov, String o, String n) {
+                        int index = n.indexOf("http://www.youtube.com/watch?v=");
+                        self.setParameter("link", n.substring(+31));
+                        Carbonara.Renderer().render();
+                    }
+                });
+                box.getChildren().addAll(word_label, word_editor);
+                break;
+        }
     }
 
     @Override
     public String generateHTML() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String html = "<div data-role=\"header\" ";
+        if(self.class_name.equalsIgnoreCase("")){
+            html += "class=\""+self.class_name+"\" ";
+        }
+        if(self.id_name.equalsIgnoreCase("")){
+            html += "class=\""+self.id_name+"\" ";
+        }
+        html+=">\n";
+        html += "<object width=\"425\" height=\"344\">\n<param name=\"movie\" value=\"http://www.youtube.com/v/"+self.getParameter("link")+"&hl=ja&fs=1\">\n</param><param name=\"allowFullScreen\" value=\"true\">\n</param>\n<param name=\"allowscriptaccess\" value=\"always\">\n</param><embed src=\"http://www.youtube.com/v/"+self.getParameter("link")+"&hl=ja&fs=1\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"425\" height=\"344\">\n</embed>\n</object>\n";
+        html+="</div>\n";
+        return html;
     }
     
 }

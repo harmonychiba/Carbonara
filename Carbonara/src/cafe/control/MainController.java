@@ -11,10 +11,15 @@ import document.Page;
 import document.tags.ButtonTag;
 import document.tags.ContentTag;
 import document.tags.CouponTag;
+import document.tags.DMMTag;
 import document.tags.FooterTag;
 import document.tags.HeaderTag;
+import document.tags.MapTag;
 import document.tags.ParagraphTag;
+import document.tags.ShareTag;
 import document.tags.Tag;
+import document.tags.TimelineTag;
+import document.tags.TweetTag;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -140,14 +145,55 @@ public class MainController implements EventHandler {
                     self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
                 }
                 break;
+<<<<<<< HEAD
             case Tag.SHARE:
                 newTag = new CouponTag();
+=======
+            case Tag.DMM:
+                newTag = new DMMTag();
                 if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
                     self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
                 } else {
                     self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
                 }
                 break;
+            case Tag.SHARE:
+                newTag = new ShareTag();
+                if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
+                    self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
+                } else {
+                    self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
+                }
+                break;
+            case Tag.TIMELINE:
+                newTag = new TimelineTag();
+                if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
+                    self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
+                } else {
+                    self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
+                }
+                break;
+            case Tag.TWEET:
+                newTag = new TweetTag();
+                if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
+                    self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
+                } else {
+                    self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
+                }
+                break;
+            case Tag.MAP:
+                newTag = new MapTag();
+>>>>>>> TagTest
+                if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
+                    self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
+                } else {
+                    self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
+                }
+                break;
+<<<<<<< HEAD
+=======
+            
+>>>>>>> TagTest
         }
     }
 

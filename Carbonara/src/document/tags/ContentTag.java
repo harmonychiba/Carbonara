@@ -135,9 +135,28 @@ public class ContentTag extends Tag {
                     case Tag.COUPON:
                         temp_tag = new CouponTag();
                         break;
+<<<<<<< HEAD
                     case Tag.SHARE:
                         temp_tag = new ShareTag();
                         break;
+=======
+                    case Tag.DMM:
+                        temp_tag = new DMMTag();
+                        break;
+                    case Tag.SHARE:
+                        temp_tag = new ShareTag();
+                        break;
+                    case Tag.TIMELINE:
+                        temp_tag = new TimelineTag();
+                        break;
+                    case Tag.TWEET:
+                        temp_tag = new TweetTag();
+                        break;
+                    case Tag.MAP:
+                        temp_tag = new MapTag();
+                        break;
+
+>>>>>>> TagTest
                 }
                 if (self.temp_tag != null) {
                     self.child_preview = self.temp_tag.generateView((float) self.preview_pane.getWidth(), (float) self.preview_pane.getHeight());
@@ -232,7 +251,6 @@ public class ContentTag extends Tag {
                 self.indexToAddTag = PageRenderer.TO_ADD_LAST_OF_LIST;
             }
 
-
         }
     }
 
@@ -270,9 +288,27 @@ public class ContentTag extends Tag {
                 case Tag.COUPON:
                     new_tag = new CouponTag();
                     break;
+<<<<<<< HEAD
                 case Tag.SHARE:
                     new_tag = new ShareTag();
                     break;
+=======
+                case Tag.DMM:
+                    new_tag = new DMMTag();
+                    break;
+                case Tag.SHARE:
+                    new_tag = new ShareTag();
+                    break;
+                case Tag.TIMELINE:
+                    new_tag = new TimelineTag();
+                    break;
+                case Tag.TWEET:
+                    new_tag = new TweetTag();
+                    break;
+                case Tag.MAP:
+                    new_tag = new MapTag();
+                    break;             
+>>>>>>> TagTest
             }
             if (new_tag != null) {
                 new_tag.setListener(self.listener);
@@ -405,18 +441,18 @@ public class ContentTag extends Tag {
     @Override
     public String generateHTML() {
         String html = "<div data-role=\"content\" ";
-        if(self.class_name.equalsIgnoreCase("")){
-            html += "class=\""+self.class_name+"\" ";
+        if (self.class_name.equalsIgnoreCase("")) {
+            html += "class=\"" + self.class_name + "\" ";
         }
-        if(self.id_name.equalsIgnoreCase("")){
-            html += "class=\""+self.id_name+"\" ";
+        if (self.id_name.equalsIgnoreCase("")) {
+            html += "class=\"" + self.id_name + "\" ";
         }
-        html+=">\n";
-            for(Tag child:self.children){
-                html+=child.generateHTML();
-            }
-        html+="</div>\n";
-        
+        html += ">\n";
+        for (Tag child : self.children) {
+            html += child.generateHTML();
+        }
+        html += "</div>\n";
+
         return html;
     }
 }

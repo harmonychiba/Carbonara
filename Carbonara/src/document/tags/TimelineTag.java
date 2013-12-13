@@ -1,7 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package document.tags;
 
 import javafx.geometry.Pos;
@@ -16,31 +18,30 @@ import javafx.scene.text.Font;
 
 /**
  *
- * @author hironori
+ * @author Takafumi
  */
-public class ShareTag extends Tag{
+public class TimelineTag extends Tag{
+    
     public static final float DEFAULT_HEADER_HEIGHT = 50.0f;
     public static final float DEFAULT_HEADER_WORD_SIZE = 32.0f;
     
-    public ShareTag() {
-        super(Tag.SHARE);
+    public TimelineTag(){
+        super(Tag.TIMELINE);
         initializeParameters();
         self.preview_pane = new AnchorPane();
         self.initPreviewPane();
+        
     }
     
     private void initializeParameters(){
-<<<<<<< HEAD
-        self.setParameter("word", "Share");
-=======
-        self.setParameter("word", "FacebookShare");
->>>>>>> TagTest
+        self.setParameter("word", "Timeline");
         self.setParameter("link","#");
         self.setParameter("image", "null");
         self.setParameter("width", "match_parent");
         self.setParameter("height", "wrap_content");
+        
     }
-
+    
     @Override
     public Pane generateView(float parentWidth, float parentHeight) {
         Pane pane = self.preview_pane;
@@ -77,7 +78,7 @@ public class ShareTag extends Tag{
             background.setHeight(Double.parseDouble(self.getParameter("height").split("px")[0]));
             text.setPrefHeight(background.getHeight());
         }
-        background.setFill(Color.BEIGE);//色の選択
+        background.setFill(Color.LIGHTGRAY);
 
         background.setArcHeight(background.getHeight() / 2.0f);
         background.setArcWidth(background.getHeight() / 2.0f);
@@ -86,6 +87,7 @@ public class ShareTag extends Tag{
         pane.getChildren().add(text);
 
         return pane;
+        
     }
 
     @Override
@@ -112,7 +114,6 @@ public class ShareTag extends Tag{
 
     @Override
     public void dragDrop(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
