@@ -135,16 +135,11 @@ public class ContentTag extends Tag {
                     case Tag.COUPON:
                         temp_tag = new CouponTag();
                         break;
-<<<<<<< HEAD
                     case Tag.SHARE:
                         temp_tag = new ShareTag();
                         break;
-=======
                     case Tag.DMM:
                         temp_tag = new DMMTag();
-                        break;
-                    case Tag.SHARE:
-                        temp_tag = new ShareTag();
                         break;
                     case Tag.TIMELINE:
                         temp_tag = new TimelineTag();
@@ -155,8 +150,6 @@ public class ContentTag extends Tag {
                     case Tag.MAP:
                         temp_tag = new MapTag();
                         break;
-
->>>>>>> TagTest
                 }
                 if (self.temp_tag != null) {
                     self.child_preview = self.temp_tag.generateView((float) self.preview_pane.getWidth(), (float) self.preview_pane.getHeight());
@@ -288,16 +281,11 @@ public class ContentTag extends Tag {
                 case Tag.COUPON:
                     new_tag = new CouponTag();
                     break;
-<<<<<<< HEAD
                 case Tag.SHARE:
                     new_tag = new ShareTag();
                     break;
-=======
                 case Tag.DMM:
                     new_tag = new DMMTag();
-                    break;
-                case Tag.SHARE:
-                    new_tag = new ShareTag();
                     break;
                 case Tag.TIMELINE:
                     new_tag = new TimelineTag();
@@ -308,7 +296,6 @@ public class ContentTag extends Tag {
                 case Tag.MAP:
                     new_tag = new MapTag();
                     break;             
->>>>>>> TagTest
             }
             if (new_tag != null) {
                 new_tag.setListener(self.listener);
