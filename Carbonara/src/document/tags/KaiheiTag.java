@@ -1,11 +1,14 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package document.tags;
 
 import cafe.Carbonara;
 import cafe.control.PageRenderer;
+import static document.tags.ContentTag.DEFAULT_CONTENT_HEIGHT;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -29,29 +32,15 @@ import javafx.util.Duration;
 
 /**
  *
- * @author chibayuuki
+ * @author Takafumi
  */
-public class ContentTag extends Tag {
+public class KaiheiTag extends Tag{
 
-    public static final float DEFAULT_CONTENT_HEIGHT = 200.0f;
-    public static final float DEFAULT_CONTENT_WORD_SIZE = 15.0f;
-    public static final float DEFAULT_CHILDREN_SPACE = 10.0f;
-    public static final float DEFAULT_MARGIN_BOTTOM = 30.0f;
-
-    public ContentTag() {
-        super(Tag.CONTENT);
+    public KaiheiTag() {
+        super(Tag.KAIHEI);
         initializeParameters();
-        self.setContainable(true);
         self.preview_pane = new AnchorPane();
-        self.children_preview = new VBox(DEFAULT_CHILDREN_SPACE);
         self.initPreviewPane();
-    }
-
-    private void initializeParameters() {
-        self.setParameter("fix", "false");
-        self.setParameter("image", "null");
-        self.setParameter("width", "match_parent");
-        self.setParameter("height", "wrap_content");
     }
 
     @Override
@@ -106,7 +95,8 @@ public class ContentTag extends Tag {
 
         self.preview_pane = pane;
 
-        return pane;
+        return pane;    
+    
     }
 
     @Override
@@ -154,7 +144,7 @@ public class ContentTag extends Tag {
                         temp_tag = new KaiheiTag();
                         break;
                 }
-                if (self.temp_tag != null) {
+            if (self.temp_tag != null) {
                     self.child_preview = self.temp_tag.generateView((float) self.preview_pane.getWidth(), (float) self.preview_pane.getHeight());
                     self.child_preview.setTranslateY(ContentTag.DEFAULT_CHILDREN_SPACE);
 
@@ -252,12 +242,12 @@ public class ContentTag extends Tag {
 
     @Override
     public void dragExit() {
-        self.children_preview.getChildren().remove(self.child_preview);
+      self.children_preview.getChildren().remove(self.child_preview);
 
         if (self.content_selected) {
             self.getChildren().get(self.focussedTag).dragExit();
         }
-        self.content_selected = false;
+        self.content_selected = false; 
     }
 
     @Override
@@ -430,19 +420,14 @@ public class ContentTag extends Tag {
 
     @Override
     public String generateHTML() {
-        String html = "<div data-role=\"content\" ";
-        if (self.class_name.equalsIgnoreCase("")) {
-            html += "class=\"" + self.class_name + "\" ";
-        }
-        if (self.id_name.equalsIgnoreCase("")) {
-            html += "class=\"" + self.id_name + "\" ";
-        }
-        html += ">\n";
-        for (Tag child : self.children) {
-            html += child.generateHTML();
-        }
-        html += "</div>\n";
-
-        return html;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    private void initializeParameters() {
+        self.setParameter("word", "Kaihei");
+        self.setParameter("link","#");
+        self.setParameter("image", "null");
+        self.setParameter("width", "match_parent");
+        self.setParameter("height", "wrap_content");}
+    
 }

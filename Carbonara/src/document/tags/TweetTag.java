@@ -29,7 +29,6 @@ public class TweetTag extends Tag{
         self.initPreviewPane();
     }
     private void initializeParameters() {
-        self.setParameter("word", "TWEET");
         self.setParameter("word", "Tweet");
         self.setParameter("link","#");
         self.setParameter("image", "null");
