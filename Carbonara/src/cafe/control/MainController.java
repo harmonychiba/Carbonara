@@ -145,16 +145,16 @@ public class MainController implements EventHandler {
                     self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
                 }
                 break;
-            case Tag.SHARE:
-                newTag = new CouponTag();
+            case Tag.DMM:
+                newTag = new DMMTag();
                 if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
                     self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
                 } else {
                     self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
                 }
                 break;
-            case Tag.DMM:
-                newTag = new DMMTag();
+            case Tag.SHARE:
+                newTag = new ShareTag();
                 if (index == PageRenderer.TO_ADD_LAST_OF_LIST){
                     self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
                 } else {
@@ -185,6 +185,7 @@ public class MainController implements EventHandler {
                     self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
                 }
                 break;
+            
         }
     }
 

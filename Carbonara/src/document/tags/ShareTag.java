@@ -118,7 +118,18 @@ public class ShareTag extends Tag{
 
     @Override
     public String generateHTML() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        
+        String url = "github.com/harmonychiba/Carbonara";//自頁への置き換えが必要
+        
+        String html = "<iframe src=\"http://www.facebook.com/plugins/like.php?href=http%3A%2F%2F";
+        
+        html += url;
+        
+        html += "%2Fi&layout=standard&show_faces=true&width=300&action=like&colorscheme=light&height=80\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; width:300px; height:80px;\" allowTransparency=\"true\">";
+        
+        html += "</iframe>\n";
+        
+        return html;
+        }
     
 }

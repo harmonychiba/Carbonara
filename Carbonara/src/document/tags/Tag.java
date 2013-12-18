@@ -40,9 +40,9 @@ public abstract class Tag {
     public static final String SHARE = "TAG_SHARE";
     public static final String TIMELINE = "TAG_TIMELINE";
     public static final String TWEET = "TAG_TWEET";
+    public static final String MOVIE = "TAG_MOVIE";
     public static final String MAP = "TAG_MAP";
     public static final String DMM = "TAG_DMM";
-    public static final String KAIHEI = "TAG_KAIHEI";
     protected final Tag self;
     private String tag_name;
     protected String class_name;

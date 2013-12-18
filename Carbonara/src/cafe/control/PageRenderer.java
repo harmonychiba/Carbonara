@@ -177,12 +177,12 @@ public class PageRenderer implements TagDataChangeListener {
                         case Tag.COUPON:
                             temp_tag = new CouponTag();
                             break;
-                        case Tag.SHARE:
-                            temp_tag = new ShareTag();
-                            break;
                         case Tag.DMM:
                            temp_tag = new DMMTag();
                            break;
+                        case Tag.SHARE:
+                            temp_tag = new ShareTag();
+                            break;
                         case Tag.TIMELINE:
                             temp_tag = new TimelineTag();
                             break;
@@ -192,6 +192,7 @@ public class PageRenderer implements TagDataChangeListener {
                         case Tag.MAP:
                             temp_tag = new MapTag();
                             break;
+                       
                     }
                     if (temp_tag != null) {
                         self.preview_tag = temp_tag.generateView((float) self.page_preview.getPrefWidth(), (float) self.page_preview.getPrefHeight());
