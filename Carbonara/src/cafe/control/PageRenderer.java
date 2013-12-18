@@ -12,6 +12,7 @@ import document.tags.CouponTag;
 import document.tags.DMMTag;
 import document.tags.FooterTag;
 import document.tags.HeaderTag;
+import document.tags.KaiheiTag;
 import document.tags.MapTag;
 import document.tags.ParagraphTag;
 import document.tags.ShareTag;
@@ -191,6 +192,9 @@ public class PageRenderer implements TagDataChangeListener {
                             break;
                         case Tag.MAP:
                             temp_tag = new MapTag();
+                            break;
+                        case Tag.KAIHEI:
+                            temp_tag = new KaiheiTag();
                             break;
                        
                     }

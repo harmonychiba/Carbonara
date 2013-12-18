@@ -150,6 +150,9 @@ public class ContentTag extends Tag {
                     case Tag.MAP:
                         temp_tag = new MapTag();
                         break;
+                    case Tag.KAIHEI:
+                        temp_tag = new KaiheiTag();
+                        break;
 
                 }
                 if (self.temp_tag != null) {
@@ -296,7 +299,10 @@ public class ContentTag extends Tag {
                     break;
                 case Tag.MAP:
                     new_tag = new MapTag();
-                    break;             
+                    break;
+                case Tag.KAIHEI:
+                    new_tag = new KaiheiTag();
+                    break;
             }
             if (new_tag != null) {
                 new_tag.setListener(self.listener);

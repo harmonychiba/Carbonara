@@ -8,6 +8,7 @@ package document.tags;
 
 import cafe.Carbonara;
 import cafe.control.PageRenderer;
+import static document.tags.ContentTag.DEFAULT_CHILDREN_SPACE;
 import static document.tags.ContentTag.DEFAULT_CONTENT_HEIGHT;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -16,10 +17,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -28,6 +31,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.shape.StrokeType;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 /**
@@ -35,19 +39,44 @@ import javafx.util.Duration;
  * @author Takafumi
  */
 public class KaiheiTag extends Tag{
+    
+    public static final float DEFAULT_CONTENT_HEIGHT = 200.0f;
+    public static final float DEFAULT_CONTENT_WORD_SIZE = 15.0f;
+    public static final float DEFAULT_CHILDREN_SPACE = 10.0f;
+    public static final float DEFAULT_MARGIN_BOTTOM = 30.0f;
+        public static final float DEFAULT_HEADER_HEIGHT = 50.0f;
+    public static final float DEFAULT_HEADER_WORD_SIZE = 32.0f;
 
     public KaiheiTag() {
         super(Tag.KAIHEI);
-        initializeParameters();
+    initializeParameters();
+        self.setContainable(true);
         self.preview_pane = new AnchorPane();
+        self.children_preview = new VBox(DEFAULT_CHILDREN_SPACE);
         self.initPreviewPane();
+    }
+
+    private void initializeParameters() {
+        self.setParameter("header", "Header");
+        self.setParameter("word", "Paragraph");
+        self.setParameter("fix", "false");
+        self.setParameter("image", "null");
+        self.setParameter("width", "match_parent");
+        self.setParameter("height", "wrap_content");
     }
 
     @Override
     public Pane generateView(float parentWidth, float parentHeight) {
+        
         Pane pane = self.preview_pane;
-
-        self.children_preview.getChildren().clear();
+        pane.getChildren().clear();
+        
+        Label text = new Label(self.getParameter("header"));
+        Font font = new Font(ParagraphTag.DEFAULT_HEADER_WORD_SIZE);
+        text.setFont(font);
+        text.setTextFill(Color.WHITE);
+        
+                self.children_preview.getChildren().clear();
 
         for (Tag child : self.getChildren()) {
             Node node = child.generateView((float) self.preview_pane.getWidth(), (float) self.preview_pane.getHeight());
@@ -61,18 +90,26 @@ public class KaiheiTag extends Tag{
 
         if (self.getParameter("width").equals("match_parent")) {
             background.setWidth(parentWidth);
+            text.setPrefWidth(parentWidth);
+            text.setAlignment(Pos.CENTER);
             self.children_preview.setPrefWidth(parentWidth);
         } else if (self.getParameter("width").equals("wrap_content")) {
+            text.setWrapText(true);
             background.setWidth(self.children_preview.getPrefWidth());
         } else if (self.getParameter("width").endsWith("px")) {
             background.setWidth(Double.parseDouble(self.getParameter("width").split("px")[0]));
+            text.setPrefWidth(background.getWidth());
             self.children_preview.setPrefWidth(background.getWidth());
         }
 
         if (self.getParameter("height").equals("match_parent")) {
             background.setHeight(parentHeight);
+            text.setPrefHeight(parentHeight);
             self.children_preview.setPrefHeight(parentHeight);
         } else if (self.getParameter("height").equals("wrap_content")) {
+            if (text.getHeight() < HeaderTag.DEFAULT_HEADER_HEIGHT) {
+                text.setPrefHeight(HeaderTag.DEFAULT_HEADER_HEIGHT);
+            }
             if (self.children_preview.getHeight() < ContentTag.DEFAULT_CONTENT_HEIGHT) {
                 self.children_preview.setPrefHeight(ContentTag.DEFAULT_CONTENT_HEIGHT);
                 background.setHeight(self.children_preview.getPrefHeight() * 5.0f / 4.0f + ContentTag.DEFAULT_MARGIN_BOTTOM);
@@ -81,6 +118,7 @@ public class KaiheiTag extends Tag{
             }
         } else if (self.getParameter("height").endsWith("px")) {
             background.setHeight(Double.parseDouble(self.getParameter("height").split("px")[0]));
+            text.setPrefHeight(background.getHeight());
             self.children_preview.setPrefHeight(background.getHeight());
         }
         background.setFill(new Color(0.8f, 0.9f, 1.0f, 0.2f));
@@ -91,12 +129,54 @@ public class KaiheiTag extends Tag{
         background.setStrokeType(StrokeType.INSIDE);
 
         pane.getChildren().add(background);
+        pane.getChildren().add(text);
         pane.getChildren().add(self.children_preview);
-
         self.preview_pane = pane;
+        
+        /*
+        Pane pane = self.preview_pane;
+        pane.getChildren().clear();
 
-        return pane;    
-    
+        Label text = new Label(self.getParameter("header"));
+        Font font = new Font(ParagraphTag.DEFAULT_HEADER_WORD_SIZE);
+        text.setFont(font);
+        text.setTextFill(Color.WHITE);
+
+        Rectangle background = new Rectangle();
+
+        if (self.getParameter("width").equals("match_parent")) {
+            background.setWidth(parentWidth);
+            text.setPrefWidth(parentWidth);
+            text.setAlignment(Pos.CENTER);
+        } else if (self.getParameter("width").equals("wrap_content")) {
+            text.setWrapText(true);
+            background.setWidth(text.getWidth());
+        } else if (self.getParameter("width").endsWith("px")) {
+            background.setWidth(Double.parseDouble(self.getParameter("width").split("px")[0]));
+            text.setPrefWidth(background.getWidth());
+        }
+
+        if (self.getParameter("height").equals("match_parent")) {
+            background.setHeight(parentHeight);
+            text.setPrefHeight(parentHeight);
+        } else if (self.getParameter("height").equals("wrap_content")) {
+            if (text.getHeight() < ParagraphTag.DEFAULT_HEADER_HEIGHT) {
+                text.setPrefHeight(ParagraphTag.DEFAULT_HEADER_HEIGHT);
+            }
+            background.setHeight(text.getPrefHeight());
+        } else if (self.getParameter("height").endsWith("px")) {
+            background.setHeight(Double.parseDouble(self.getParameter("height").split("px")[0]));
+            text.setPrefHeight(background.getHeight());
+        }
+        background.setOpacity(0.0f);
+
+
+        pane.getChildren().add(background);
+        pane.getChildren().add(text);
+                */
+        
+        return pane;
+        
     }
 
     @Override
@@ -125,11 +205,11 @@ public class KaiheiTag extends Tag{
                     case Tag.COUPON:
                         temp_tag = new CouponTag();
                         break;
-                    case Tag.SHARE:
-                        temp_tag = new ShareTag();
-                        break;
                     case Tag.DMM:
                         temp_tag = new DMMTag();
+                        break;
+                    case Tag.SHARE:
+                        temp_tag = new ShareTag();
                         break;
                     case Tag.TIMELINE:
                         temp_tag = new TimelineTag();
@@ -140,11 +220,12 @@ public class KaiheiTag extends Tag{
                     case Tag.MAP:
                         temp_tag = new MapTag();
                         break;
-                    case Tag.KAIHEI:
+                    case  Tag.KAIHEI:
                         temp_tag = new KaiheiTag();
                         break;
+
                 }
-            if (self.temp_tag != null) {
+                if (self.temp_tag != null) {
                     self.child_preview = self.temp_tag.generateView((float) self.preview_pane.getWidth(), (float) self.preview_pane.getHeight());
                     self.child_preview.setTranslateY(ContentTag.DEFAULT_CHILDREN_SPACE);
 
@@ -242,12 +323,12 @@ public class KaiheiTag extends Tag{
 
     @Override
     public void dragExit() {
-      self.children_preview.getChildren().remove(self.child_preview);
+        self.children_preview.getChildren().remove(self.child_preview);
 
         if (self.content_selected) {
             self.getChildren().get(self.focussedTag).dragExit();
         }
-        self.content_selected = false; 
+        self.content_selected = false;
     }
 
     @Override
@@ -274,11 +355,11 @@ public class KaiheiTag extends Tag{
                 case Tag.COUPON:
                     new_tag = new CouponTag();
                     break;
-                case Tag.SHARE:
-                    new_tag = new ShareTag();
-                    break;
                 case Tag.DMM:
                     new_tag = new DMMTag();
+                    break;
+                case Tag.SHARE:
+                    new_tag = new ShareTag();
                     break;
                 case Tag.TIMELINE:
                     new_tag = new TimelineTag();
@@ -288,7 +369,10 @@ public class KaiheiTag extends Tag{
                     break;
                 case Tag.MAP:
                     new_tag = new MapTag();
-                    break;             
+                    break;
+                case Tag.KAIHEI:
+                    new_tag = new KaiheiTag();
+                    break;
             }
             if (new_tag != null) {
                 new_tag.setListener(self.listener);
@@ -415,19 +499,51 @@ public class KaiheiTag extends Tag{
 
                 box.getChildren().addAll(height_label, height_match_parent, height_wrap_content, height_px_editor);
                 break;
+            case "header":
+                Label header_label = new Label("ヘッダ");
+                TextField header_editor = new TextField("文字を指定する");
+                header_editor.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> ov, String o, String n) {
+                        self.setParameter("header", n);
+                        Carbonara.Renderer().render();
+                    }
+                });
+                box.getChildren().addAll(header_label, header_editor);
+                break;
+                case "word":
+                Label word_label = new Label("文字");
+                TextArea word_editor = new TextArea("文字を指定する");
+                word_editor.textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> ov, String o, String n) {
+                        self.setParameter("word", n);
+                        Carbonara.Renderer().render();
+                    }
+                });
+                box.getChildren().addAll(word_label, word_editor);
+                break;
         }
     }
 
     @Override
     public String generateHTML() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        //String html = "<div data-role=\"content\" ";
+        String html = "<div data-role=\"collapsible\"";
+        if (self.class_name.equalsIgnoreCase("")) {
+            html += "class=\"" + self.class_name + "\" ";
+        }
+        if (self.id_name.equalsIgnoreCase("")) {
+            html += "class=\"" + self.id_name + "\" ";
+        }
+        html += ">\n";
+        html += "<h2>"+self.getParameter("header")+"</h2>\n"; 
+        html += "<p>"+self.getParameter("word")+"</p>\n";
+        for (Tag child : self.children) {
+            html += child.generateHTML();
+        }
+        html += "</div>\n";
 
-    private void initializeParameters() {
-        self.setParameter("word", "Kaihei");
-        self.setParameter("link","#");
-        self.setParameter("image", "null");
-        self.setParameter("width", "match_parent");
-        self.setParameter("height", "wrap_content");}
-    
+        return html;
+    }
 }

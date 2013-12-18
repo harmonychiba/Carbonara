@@ -14,6 +14,7 @@ import document.tags.CouponTag;
 import document.tags.DMMTag;
 import document.tags.FooterTag;
 import document.tags.HeaderTag;
+import document.tags.KaiheiTag;
 import document.tags.MapTag;
 import document.tags.ParagraphTag;
 import document.tags.ShareTag;
@@ -185,6 +186,14 @@ public class MainController implements EventHandler {
                     self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
                 }
                 break;
+            case Tag.KAIHEI:
+                newTag = new KaiheiTag();
+                if (index == PageRenderer.TO_ADD_LAST_OF_LIST) {
+                    self.document.getPageAtIndex(self.currentPageIndex).addTag(newTag);
+                } else {
+                    self.document.getPageAtIndex(self.currentPageIndex).insertTag(newTag, index);
+                }
+            break;
             
         }
     }
