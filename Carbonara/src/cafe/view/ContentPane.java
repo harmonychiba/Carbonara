@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.Reflection;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -39,7 +40,7 @@ public class ContentPane extends AnchorPane {
     public static final float TAG_ICON_SPACE = 30.0f;
     public static final float TAG_ICON_CONTAINER_HEIGHT = 140.0f;
     public static final float TAG_ICON_BUTTON_WIDTH = 80.0f;
-    public static final float TAG_ICON_BUTTON_HEIGHT = 120.0f;
+    public static final float TAG_ICON_BUTTON_HEIGHT = 80.0f;
     public static final float PAGES_ICON_SPACE = 20.0f;
     public static final float PAGES_ICON_CONTAINER_WIDTH = 220.0f;
     public static final float PAGES_ICON_CONTAINER_HORIZONTAL_SPACE = 10.0f;
@@ -157,8 +158,13 @@ public class ContentPane extends AnchorPane {
         self.menu_icon_container.setStyle("-fx-background-color: #afafaf;-fx-background-radius:5px;-fx-border-color:#5f5f5f;-fx-border-width:1px;-fx-border-radius:5px;");
 
         self.menu_icon_buttons = new ArrayList<>();
-
-        Button menu_icon_new = new Button("新規作成");
+        
+        Image img = new Image("icon_new.png");
+        ImageView icon_new = new  ImageView(img);
+        icon_new.setFitHeight(40f);
+        icon_new.setFitWidth(40f);
+        Button menu_icon_new = new Button();
+        menu_icon_new.setGraphic(icon_new);
         Button menu_icon_open = new Button("開く");
         Button menu_icon_save = new Button("保存する");
         Button menu_icon_save_as = new Button("名前を付けて保存する");
@@ -198,13 +204,28 @@ public class ContentPane extends AnchorPane {
         //Button tag_icon_title = new Button("Title");
         Button tag_icon_paragraph = new Button("Paragraph");
         Button tag_icon_coupon = new Button("Coupon");
-        Button tag_icon_share = new Button("Share");
+        img = new Image("icon_facebook.png");
+        ImageView icon_facebook = new ImageView(img);
+        icon_facebook.setFitHeight(60f);
+        icon_facebook.setFitWidth(60f);
+        Button tag_icon_share = new Button();
+        tag_icon_share.setGraphic(icon_facebook);
         Button tag_icon_timeline = new Button("Timeline");
         Button tag_icon_tweet = new Button("Tweet");
         //Button tag_icon_movie = new Button("Movie");
         Button tag_icon_map = new Button("Map");
-        Button tag_icon_dmm = new Button("Youtube");
-        Button tag_icon_kaihei = new Button("開閉");
+        img = new Image("icon_youtube.png");
+        ImageView icon_dmm = new ImageView(img);
+        icon_dmm.setFitWidth(60f);
+        icon_dmm.setFitHeight(60f);
+        Button tag_icon_dmm = new Button();
+        tag_icon_dmm.setGraphic(icon_dmm);
+        img = new Image("icon_kaihei.png");
+        ImageView icon_kaihei = new ImageView(img);
+        icon_kaihei.setFitWidth(60f);
+        icon_kaihei.setFitHeight(60f);
+        Button tag_icon_kaihei = new Button();
+        tag_icon_kaihei.setGraphic(icon_kaihei);
 
         tag_icon_header.setId(TAG_HEADER_ID);
         tag_icon_footer.setId(TAG_FOOTER_ID);
@@ -234,6 +255,7 @@ public class ContentPane extends AnchorPane {
         //self.tag_icon_buttons.add(tag_icon_movie);
         self.tag_icon_buttons.add(tag_icon_map);
         self.tag_icon_buttons.add(tag_icon_dmm);
+        
         self.tag_icon_buttons.add(tag_icon_kaihei);
 
         for (Button tag_icon : self.tag_icon_buttons) {

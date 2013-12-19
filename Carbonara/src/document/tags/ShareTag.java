@@ -73,7 +73,7 @@ public class ShareTag extends Tag{
             background.setHeight(Double.parseDouble(self.getParameter("height").split("px")[0]));
             text.setPrefHeight(background.getHeight());
         }
-        background.setFill(Color.BEIGE);//色の選択
+        background.setFill(Color.DARKBLUE);//色の選択
 
         background.setArcHeight(background.getHeight() / 2.0f);
         background.setArcWidth(background.getHeight() / 2.0f);

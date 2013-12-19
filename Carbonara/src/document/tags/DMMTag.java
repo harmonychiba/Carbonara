@@ -132,6 +132,7 @@ public class DMMTag extends Tag{
             case "link":
                 Label word_label = new Label("URL");
                 TextField word_editor = new TextField("YoutubeのURLを入力");
+                //TextField word_editor = new TextField(System.getProperty("user.dir"));
                 word_editor.textProperty().addListener(new ChangeListener<String>() {
                     @Override
                     public void changed(ObservableValue<? extends String> ov, String o, String n) {
