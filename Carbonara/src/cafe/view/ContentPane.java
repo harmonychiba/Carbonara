@@ -166,7 +166,12 @@ public class ContentPane extends AnchorPane {
         Button menu_icon_new = new Button();
         menu_icon_new.setGraphic(icon_new);
         Button menu_icon_open = new Button("開く");
-        Button menu_icon_save = new Button("保存する");
+        img = new Image("icon_save.png");
+        ImageView icon_save = new ImageView(img);
+        icon_save.setFitHeight(40f);
+        icon_save.setFitWidth(40f);
+        Button menu_icon_save = new Button();
+        menu_icon_save.setGraphic(icon_save);
         Button menu_icon_save_as = new Button("名前を付けて保存する");
         Button menu_icon_commit = new Button("Webサイトを更新する");
 
@@ -211,7 +216,12 @@ public class ContentPane extends AnchorPane {
         Button tag_icon_share = new Button();
         tag_icon_share.setGraphic(icon_facebook);
         Button tag_icon_timeline = new Button("Timeline");
-        Button tag_icon_tweet = new Button("Tweet");
+        img = new Image("icon_tweet.png");
+        ImageView icon_tweet = new ImageView(img);
+        icon_tweet.setFitHeight(60f);
+        icon_tweet.setFitWidth(60f);
+        Button tag_icon_tweet = new Button();
+        tag_icon_tweet.setGraphic(icon_tweet);
         //Button tag_icon_movie = new Button("Movie");
         Button tag_icon_map = new Button("Map");
         img = new Image("icon_youtube.png");
