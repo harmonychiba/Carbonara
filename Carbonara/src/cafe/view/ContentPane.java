@@ -201,19 +201,38 @@ public class ContentPane extends AnchorPane {
         self.tag_icon_container.setStyle("-fx-background-color: #efefef;-fx-background-radius:5px;-fx-border-color:#afafaf;-fx-border-width:1px;-fx-border-radius:5px;");
 
         self.tag_icon_buttons = new ArrayList<>();
-
-        Button tag_icon_header = new Button("Header");
-        Button tag_icon_footer = new Button("Footer");
+        
+        img = new Image("icon_header.png");
+        ImageView icon_header = new ImageView(img);
+        icon_header.setFitHeight(60f);
+        icon_header.setFitWidth(60f);
+        Button tag_icon_header = new Button();
+        tag_icon_header.setStyle("-fx-base: #ffffffff");
+        tag_icon_header.setGraphic(icon_header);
+        img = new Image("icon_footer.png");
+        ImageView icon_footer = new ImageView(img);
+        icon_footer.setFitHeight(60f);
+        icon_footer.setFitWidth(60f);
+        Button tag_icon_footer = new Button();
+        tag_icon_footer.setStyle("-fx-base: #ffffffff");
+        tag_icon_footer.setGraphic(icon_footer);
         Button tag_icon_content = new Button("Content");
         Button tag_icon_button = new Button("Button");
-        //Button tag_icon_title = new Button("Title");
-        Button tag_icon_paragraph = new Button("Paragraph");
+        Button tag_icon_title = new Button("Title");
+         img = new Image("icon_paragraph.png");
+         ImageView icon_paragraph = new ImageView(img);
+         icon_paragraph.setFitHeight(60f);
+         icon_paragraph.setFitWidth(60f);
+        Button tag_icon_paragraph = new Button();
+        tag_icon_paragraph.setStyle("-fx-base: #a5e280ff;");
+        tag_icon_paragraph.setGraphic(icon_paragraph);
         Button tag_icon_coupon = new Button("Coupon");
         img = new Image("icon_facebook.png");
         ImageView icon_facebook = new ImageView(img);
         icon_facebook.setFitHeight(60f);
         icon_facebook.setFitWidth(60f);
         Button tag_icon_share = new Button();
+        tag_icon_share.setStyle("-fx-base: #000080ff;");
         tag_icon_share.setGraphic(icon_facebook);
         Button tag_icon_timeline = new Button("Timeline");
         img = new Image("icon_tweet.png");
@@ -221,20 +240,29 @@ public class ContentPane extends AnchorPane {
         icon_tweet.setFitHeight(60f);
         icon_tweet.setFitWidth(60f);
         Button tag_icon_tweet = new Button();
+        tag_icon_tweet.setStyle("-fx-base: #67a8ffff;");
         tag_icon_tweet.setGraphic(icon_tweet);
         //Button tag_icon_movie = new Button("Movie");
-        Button tag_icon_map = new Button("Map");
+        img = new Image("icon_map.png");
+        ImageView icon_map = new ImageView(img);
+        icon_map.setFitHeight(60f);
+        icon_map.setFitWidth(60f);
+        Button tag_icon_map = new Button();
+        tag_icon_map.setStyle("-fx-base: #c7c05eff;");
+        tag_icon_map.setGraphic(icon_map);
         img = new Image("icon_youtube.png");
         ImageView icon_dmm = new ImageView(img);
         icon_dmm.setFitWidth(60f);
         icon_dmm.setFitHeight(60f);
         Button tag_icon_dmm = new Button();
+        tag_icon_dmm.setStyle("-fx-base: #e99d91;");
         tag_icon_dmm.setGraphic(icon_dmm);
         img = new Image("icon_kaihei.png");
         ImageView icon_kaihei = new ImageView(img);
         icon_kaihei.setFitWidth(60f);
         icon_kaihei.setFitHeight(60f);
         Button tag_icon_kaihei = new Button();
+        tag_icon_kaihei.setStyle("-fx-base: #fbb763ff;");
         tag_icon_kaihei.setGraphic(icon_kaihei);
 
         tag_icon_header.setId(TAG_HEADER_ID);
@@ -294,7 +322,7 @@ public class ContentPane extends AnchorPane {
             });
         }
 
-        self.tag_icon_container.getChildren().addAll(tag_icon_header, tag_icon_footer, tag_icon_content,tag_icon_button, tag_icon_paragraph,tag_icon_coupon,tag_icon_timeline,tag_icon_tweet,tag_icon_share,tag_icon_map,tag_icon_dmm,tag_icon_kaihei);
+        self.tag_icon_container.getChildren().addAll(tag_icon_header, tag_icon_footer, tag_icon_paragraph,tag_icon_tweet,tag_icon_share,tag_icon_map,tag_icon_dmm,tag_icon_kaihei);
         //self.tag_icon_container.getChildren().addAll(tag_icon_dmm);
         
         for (Button _tag_icon_button : self.tag_icon_buttons) {

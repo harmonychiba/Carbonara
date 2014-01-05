@@ -76,7 +76,7 @@ public class TweetTag extends Tag{
             background.setHeight(Double.parseDouble(self.getParameter("height").split("px")[0]));
             text.setPrefHeight(background.getHeight());
         }
-        background.setFill(Color.LIGHTGRAY);
+        background.setFill(Color.SKYBLUE);
 
         background.setArcHeight(background.getHeight() / 2.0f);
         background.setArcWidth(background.getHeight() / 2.0f);
